@@ -1,0 +1,12 @@
+{
+  "name": "angular_test",
+  "version": "0.1.0",
+  "dependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-watch": "latest"
+
+  }
+}

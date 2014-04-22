@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<title>AngularJS test</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+
+
+
+</head>
+<body ng-controller="testController">
+	
+
+
+
+
+
+<h1>{{title}}</h1>
+
+<input type="text" ng-model="title"> <button ng-click="add()" onclick="debug(data2);" >clicky-meez</button>
+
+ <ul>
+        <li ng-repeat="foo in data"> {{ foo }} </li>
+    </ul>
+ 
+
+<script type="text/javascript">
+	
+function testController($scope){
+	$scope.add = function(){
+		$scope.data = ["foo", "bar"];
+		$scope.data.push($scope.title);
+		$scope.title = "";
+	}
+}
+
+
+
+</script>
+
+
+
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/data.js"></script>
+</body>
+</html>
