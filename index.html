@@ -3,44 +3,120 @@
 <head>
 <title>AngularJS test</title>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="css/app.css">
 
-
-
-</head>
-<body ng-controller="testController">
-	
-
-
-
-
-
-<h1>{{title}}</h1>
-
-<input type="text" ng-model="title"> <button ng-click="add()" onclick="debug(data2);" >clicky-meez</button>
-
- <ul>
-        <li ng-repeat="foo in data"> {{ foo }} </li>
-    </ul>
- 
+<style type="text/css">
+	.debit{
+		background-color: red;
+		color: #fff;
+	}
+	.credit{
+		background-color: green;
+		color: #fff;
+	}
+</style>
 
 <script type="text/javascript">
-	
-function testController($scope){
-	$scope.add = function(){
-		$scope.data = ["foo", "bar"];
-		$scope.data.push($scope.title);
-		$scope.title = "";
-	}
-}
+$(document).ready(function(){
+	app_init();
+});
 
+var entries;
+
+function	app_init(){
+
+ $.get('js/data.json', function(obj){
+	console.log(obj);
+	entries = obj;
+	
+
+	// Load up the records we have...
+	for(i = 0; i < entries.length; i++){
+		var typeClass = "debit";
+
+		if(entries[i].type == 1){ typeClass = "credit"; }
+		if(entries[i].check_id == "null"){}
+		var chkbk_entry = "<tr>";
+		chkbk_entry += "<td>img</td>"+
+									 "<td>"+ entries[i].check_id +"</td>"+
+									 "<td>"+ entries[i].date +"</td>"+
+									 "<td>"+ entries[i].note +"</td>"+
+									 "<td>"+ entries[i].type +"</td>"+
+									 "<td class="+ typeClass +">"+ entries[i].amount +"</td>"+
+									 "<td>"+ entries[i].balance +"</td>"+
+									 "</tr>";
+
+		$('#chkbk-tbl').append(chkbk_entry);
+	}
+	
+
+
+});
+
+			
+		
+
+
+
+
+}
 
 
 </script>
 
+</head>
+<body>
+<h2>New chkbk</h2>
+Checkbook name: <input type="text" name="chckbk-name" id="chkbk-name" placeholder="e.g. Primary checking"> <br>
+Starting balance: <input type="text" name="starting-balance" id="starting-balance" placehodler="Last entry in your checkbook"> <br>
+
+
+
+<hr>
+<div id="chkbk-wrapper">
+<table id="chkbk-tbl">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Check ID</th>
+			<th>Date</th>
+			<th>Note</th>
+			<th>Type</th>
+			<th>Amount</th>
+			<th>Balance</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		
+	</tbody>
+
+	// list goes here
+
+
+
+
+
+	<tr>
+		<td><button>receipt</button></td>
+		<td><input type="number" id="chkbk_id"></td>
+		<td><input type="date" id="chkbk_date"></td>
+		<td><input type="text" id="chkbk_note"></td>
+		<td><label><input type="radio" value="0" name="chkbk_type" checked> -</label> <label> <input type="radio" value="1" name="chkbk_type"> +</label> </td>
+		<td><input type="number" id="chkbk_amount"></td>
+		<td>Balance</td>
+		<td><button>Save</button></td>
+	</tr>
+</table>
+
+
+</div>
+
+
 
 
 <script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/data.js"></script>
 </body>
 </html>
